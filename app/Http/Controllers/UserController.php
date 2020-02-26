@@ -17,6 +17,7 @@ class UserController extends Controller
     {
         $posts = $user->posts()->get()->sortByDesc('id');
 
+
         return view("/profile", ["user" => $user, "posts" => $posts]);
     }
 

@@ -34,5 +34,6 @@ Route::put('/edit', 'UserController@update');
 Route::get('/search', 'SearchController@getResults')->name('search.results');
 
 // Follow/unfollow
-Route::post('/profile/{user}', 'FollowerController@store');
+Route::post('/profile/{user}', 'FollowerController@follow');
+Route::delete('/profile/{user}', 'FollowerController@unfollow');
 

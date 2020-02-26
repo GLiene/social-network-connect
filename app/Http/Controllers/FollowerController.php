@@ -19,28 +19,33 @@ class FollowerController extends Controller
         //
     }
 
-    public function store(Request $request, User $user)
+    public function follow(Request $request, User $user)
     {
-        if(Auth::user()->followers()->where('following_to_id', $user->id)->value('following_to_id') !== $user->id)
+        if(Auth::user()->following()->where('following_to_id', $user->id)->value('following_to_id') !== $user->id)
         {
-            $follower = new Follower();
-            $follower->user_id = Auth::user()->id;
-            $follower->following_to_id = $user->id;
-            $request->user()->followers()->save($follower);
+            $following = new Follower();
+            $following->user_id = Auth::user()->id;
+            $following->following_to_id = $user->id;
+            $request->user()->following()->save($following);
         };
 
         return redirect('/profile/' . $user->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Follower  $follower
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Follower $follower)
+    public function unfollow(User $user)
     {
-        //
+ //       var_dump($user->id);die;
+        $followingAll = Auth::user()->following()->get();
+
+
+        foreach ($followingAll as $following){
+            if($following->following_to_id === $user->id)
+            {
+                $following->delete();
+            }
+        }
+
+        return redirect('/profile/' . $user->id);
     }
 
 }

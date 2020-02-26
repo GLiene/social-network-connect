@@ -27,7 +27,7 @@ class HomeController extends Controller
 
         $followingToId = [];
 
-        foreach(Auth::user()->followers->all() as $user)
+        foreach(Auth::user()->following->all() as $user)
         {
             array_push($followingToId, $user->following_to_id);
         }
