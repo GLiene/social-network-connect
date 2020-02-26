@@ -11,9 +11,10 @@ class SearchController extends Controller
 
     public function getResults(Request $request)
     {
-        $searchQuery = $request->input('query');
-        $users = User::where(DB::raw("CONCAT(name, ' ' , surname)"), 'LIKE', "%{$searchQuery}%")->get();
+        $searchQuery = $request->input('searchQuery');
 
+        $users = User::where('name', 'LIKE', '%' . $searchQuery . '%')
+        ->orWhere('surname', 'LIKE', '%' . $searchQuery . '%')->get();
 
         return view('search.results', compact('users'));
     }
