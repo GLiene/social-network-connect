@@ -13,8 +13,6 @@
                             </div>
                             <div class="col-6">
                                 <p>{{ $user->bio }}</p>
-                                <button type="submit" class="btn btn-primary">Add Friend</button>
-                                <button type="submit" class="btn btn-primary">Fallow</button>
                             </div>
                             <div class="col">
                                <p>Birth of date: {{ $user->birthday }}</p>
@@ -48,7 +46,7 @@
                                         Like button
                                     </div>
                                     <div class="col-3">
-                                        @if(Auth::check())
+                                        @if(Auth::user()->id === $user->id)
                                             <form method= "POST" action="{{'/home/delete/'. $post->id}}" >
                                                 @csrf
                                                 @method('DELETE')
@@ -67,8 +65,17 @@
 
             <div class="col">
                 <div class="card">
-                    <div class="card-header">Advertisements</div>
-
+                    @if(Auth::user()->id !== $user->id)
+                    <div class="card-header">
+                        <form>
+                            <button type="submit" class="btn btn-primary">Add Friend</button>
+                        </form>
+                        <form method="POST" action="{{ '/profile/' . $user->id }}">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Follow</button>
+                        </form>
+                    </div>
+                    @endif
                     <div class="card-body">
 
                         At the moment not selling your data to third parties.

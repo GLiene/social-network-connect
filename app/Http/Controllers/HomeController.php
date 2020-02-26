@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all()->sortByDesc('id');
+
+        $followingToId = [];
+
+        foreach(Auth::user()->followers->all() as $user)
+        {
+            array_push($followingToId, $user->following_to_id);
+        }
+
+        array_push($followingToId, Auth::user()->id);
+
+        $posts = Post::whereIn('user_id', $followingToId)->orderBy('updated_at', 'desc')->get();
 
         return view('home', compact('posts'));
     }

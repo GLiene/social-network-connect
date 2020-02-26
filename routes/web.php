@@ -33,4 +33,6 @@ Route::put('/edit', 'UserController@update');
 // search
 Route::get('/search', 'SearchController@getResults')->name('search.results');
 
+// Follow/unfollow
+Route::post('/profile/{user}', 'FollowerController@store');
 
