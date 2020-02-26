@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img src="../../storage/app/public/img/default.jpeg">
+                        <img src="{{ Auth::user()->img_location }}" width="90px">
                         {{Auth::user()->name . " " . Auth::user()->surname }}
 
                     </div>
@@ -14,10 +14,10 @@
                     <nav class="navbar  navbar-dark bg-dark sidebar">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ '#' }}">Profile</a>
+                                <a class="nav-link" href="{{'profile/' . Auth::user()->id }}">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ '#' }}">Edit profile</a>
+                                <a class="nav-link" href="{{'edit/' }}">Edit profile</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Gallery</a>
@@ -26,11 +26,10 @@
                                 <a class="nav-link" href="#">Friends</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Following/Followers</a>
+                                <a class="nav-link" href="{{ 'following' }}">Following</a>
                             </li>
                         </ul>
                     </nav>
-                    Here will be users galleries
 
                 </div>
             </div>

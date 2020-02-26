@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img src="../public/img/default.jpeg" width="90px">
+                        <img src="{{ Auth::user()->img_location }}" width="90px">
                         <h3>{{Auth::user()->name . " " . Auth::user()->surname }}</h3>
 
                     </div>
@@ -26,7 +26,7 @@
                                         <a class="nav-link" href="#">Friends</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Following/Followers</a>
+                                        <a class="nav-link" href="{{ 'following' }}">Following</a>
                                     </li>
                                 </ul>
                         </nav>
