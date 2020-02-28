@@ -51,5 +51,13 @@ Route::delete('/friends/delete/{user}', 'FriendsController@deleteFriendFromFrien
 Route::post('/like/{post}', 'LikeController@like');
 Route::delete('/like/{post}', 'LikeController@unlike');
 
+//Galleries
+Route::get('/galleries', 'GalleryController@allGalleries')->name('galleriesShow');
+Route::post('/galleries', 'GalleryController@storeGallery')->name('galleriesStore');
+Route::get('/galleries/{gallery}', 'GalleryController@show')->name('galleryShow');
+Route::post('/gallery/{gallery}', 'ImageController@uploadImage')->name('gallery');
+Route::delete('/gallery/{image}', 'ImageController@deleteImage')->name('galleryDelete');
+Route::delete('/galleries/delete/{gallery}', 'GalleryController@deleteGallery')->name('galleries');
+
 
 

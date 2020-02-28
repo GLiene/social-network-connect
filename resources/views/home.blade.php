@@ -19,7 +19,7 @@
                                 <a class="nav-link" href="{{'edit/' }}">Edit profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Gallery</a>
+                                <a class="nav-link" href="{{'galleries'}}">Gallery</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ 'friends' }}">Friends</a>

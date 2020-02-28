@@ -89,4 +89,9 @@ class User extends Authenticatable
         return $this->img_location ? Storage::url($this->img_location, 'public') : asset("/default.jpg");
     }
 
+    public function galleries()
+    {
+        return $this->hasMany('App\Gallery');
+    }
+
 }
