@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use App\Friend;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -81,6 +82,11 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany('App\Like');
+    }
+
+    public function img_location(): string
+    {
+        return $this->img_location ? Storage::url($this->img_location, 'public') : asset("/default.jpg");
     }
 
 }

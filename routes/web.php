@@ -29,6 +29,7 @@ Route::delete('/home/delete/{post}', 'PostsController@destroy');
 Route::get('/profile/{user}', 'UserController@showUsersPosts');
 Route::get('/edit', 'UserController@editForm');
 Route::put('/edit', 'UserController@update');
+Route::put("/edit/img", "UserController@profilePictureUpload")->name("editProfile");
 
 // search
 Route::get('/search', 'SearchController@getResults')->name('search.results');
@@ -49,4 +50,6 @@ Route::delete('/friends/delete/{user}', 'FriendsController@deleteFriendFromFrien
 //Like, unlike function
 Route::post('/like/{post}', 'LikeController@like');
 Route::delete('/like/{post}', 'LikeController@unlike');
+
+
 

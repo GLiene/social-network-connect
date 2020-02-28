@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img src="{{ Auth::user()->img_location }}" width="90px">
+                        <img src="{{ asset("storage/". $user->img_location) }}" width="90px">
                         {{Auth::user()->name . " " . Auth::user()->surname }}
 
                     </div>
@@ -34,6 +34,28 @@
                 </div>
             </div>
             <div class="col-6">
+
+                <form action="{!! route('editProfile') !!}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method("put")
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="image" class="text-md-right">{{ __('Profile picture') }}</label>
+                            <p >Select image to upload:</p>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{{ $user->img_location() }}" width="100px">
+
+                            <input type="file" class="form-control-file" name="image" id="fileToUpload" >
+                            <input type="submit" class="btn btn-primary" name="uploadImage" value="Upload Image">
+                            @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                </form>
                 <form method="POST" action="{{ url('/edit') }}">
                     @csrf
                     @method('PUT')
@@ -65,7 +87,6 @@
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
-
 
             <div class="col">
                 <div class="card">

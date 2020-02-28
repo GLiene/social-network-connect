@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -43,9 +44,21 @@ class UserController extends Controller
             'bio' => $request->bio,
             'updated_at' => now(),
         ]);
-
+        return back();
      //   return view('/profile', ['user' => $user]);
-        //storage:link
+
+    }
+
+    public function profilePictureUpload(Request $request)
+    {
+        if(request()->hasFile("image")){
+            $user = Auth::user();
+            $user->update([
+                "img_location" => request()->image->store("img","public"),
+            ]);
+        }
+
+        return back()->with('message', 'Profile Picture Uploaded');
     }
 
     /**
