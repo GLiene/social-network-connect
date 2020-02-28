@@ -10,25 +10,25 @@
                         <h3>{{Auth::user()->name . " " . Auth::user()->surname }}</h3>
                     </div>
 
-                        <nav class="navbar  navbar-dark bg-dark sidebar">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{'profile/' . Auth::user()->id }}">Profile</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{'edit/' }}">Edit profile</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Gallery</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ 'friends' }}">Friends</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ 'following' }}">Following</a>
-                                    </li>
-                                </ul>
-                        </nav>
+                    <nav class="navbar  navbar-dark bg-dark sidebar">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{'profile/' . Auth::user()->id }}">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{'edit/' }}">Edit profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Gallery</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ 'friends' }}">Friends</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ 'following' }}">Following</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <div class="col-6">
@@ -54,18 +54,23 @@
                                 <p>{!!  $post->post !!}</p>
                                 <div class="row">
                                     <div class="col-9">
-                                        <form method= "POST" action="{{'/home/like/'. $post->id}}" >
+                                        <form method= "POST" action="{{'/like/'. $post->id}}" >
                                             @csrf
                                             <button type="submit" class="btn btn-primary mb-2">Like</button>
+                                        </form>
+                                        <form method= "POST" action="{{'/like/'. $post->id}}" >
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-primary mb-2">unlike</button>
                                         </form>
                                     </div>
                                     <div class="col-3">
                                         @if(Auth::user()->id === $post->user_id)
-                                        <form method= "POST" action="{{'/home/delete/'. $post->id}}" >
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-primary mb-2">Delete</button>
-                                        </form>
+                                            <form method= "POST" action="{{'/home/delete/'. $post->id}}" >
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-primary mb-2">Delete</button>
+                                            </form>
 
                                         @endif
                                     </div>
@@ -76,13 +81,10 @@
                     @endforeach
                 </div>
             </div>
-
             <div class="col">
                 <div class="card">
                     <div class="card-header">Advertisements</div>
-
-                        At the moment not selling your data to third parties.
-                    </div>
+                    At the moment not selling your data to third parties.
                 </div>
             </div>
         </div>

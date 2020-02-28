@@ -29,18 +29,19 @@ class PendingInvitationController extends Controller
 
     public function approveFriend(User $user)
     {
-
+        //need to be fixed
         PendingInvitation::where(["pending_friend_id" => Auth::user()->id], ["user_id" => $user->id])->delete();
 
-            Auth::user()->friends()->create([
-                'friend_id' => $user->id
-            ]);
+        Auth::user()->friends()->create([
+            'friend_id' => $user->id
+        ]);
 
         return view('/friends');
     }
 
     public function deleteFriendRequest(User $user)
     {
+        //need to be fixed
         Auth::user()->pendingInvitations()->where('pending_friend_id', $user->id)->delete();
 
         return view('/friends');

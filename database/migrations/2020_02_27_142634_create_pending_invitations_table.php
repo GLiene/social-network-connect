@@ -21,10 +21,10 @@ class CreatePendingInvitationsTable extends Migration
             $table->primary(['user_id', 'pending_friend_id']);
 
             $table->foreign('user_id')->references('id')->on('users')
-            ->onDelete('cascade');
+                ->onDelete('cascade');
 
             $table->foreign('pending_friend_id')->references('id')->on('users')
-            ->onDelete('cascade');
+                ->onDelete('cascade');
         });
 
     }

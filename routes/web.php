@@ -47,5 +47,6 @@ Route::delete('/friends/{user}', 'PendingInvitationController@deleteFriendReques
 Route::delete('/friends/delete/{user}', 'FriendsController@deleteFriendFromFriendsView');
 
 //Like, unlike function
-//Route::post('/profile/friend/{user}', 'LikeController@like');
+Route::post('/like/{post}', 'LikeController@like');
+Route::delete('/like/{post}', 'LikeController@unlike');
 

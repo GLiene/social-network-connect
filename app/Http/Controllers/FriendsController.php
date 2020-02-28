@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FriendsController extends Controller
 {
-
     public function allFriendsAndPending()
     {
         $user = Auth::user();
