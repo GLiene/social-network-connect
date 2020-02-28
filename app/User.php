@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use App\Friend;
 
 class User extends Authenticatable
 {
@@ -36,6 +38,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $primaryKey = 'id';
+
     public function posts()
     {
         return $this->hasMany('App\Post');
@@ -43,13 +47,43 @@ class User extends Authenticatable
 
     public function following()
     {
-        return $this->hasMany('App\Follower', "user_id");
+        return $this->hasMany('App\Follower');
     }
 
-    public function address()
+    public function friends()
     {
-        return $this->address ?? null;
+        return $this->hasMany('App\Friend', 'user_id','friend_id');
     }
+
+    public function friendOf()
+    {
+        return $this->belongsToMany("App\User","friends","friend_id","user_id");
+    }
+
+    public function pendingInvitations()
+    {
+        return $this->hasMany('App\PendingInvitation');
+    }
+
+    public function pendingInvitationsFromUsers()
+    {
+        return $this->belongsToMany("App\User","pending_invitations","pending_friend_id","user_id");
+    }
+
+    public function pendingFriends()
+    {
+        return DB::table('users')
+            ->leftJoin('friends', 'users.id', '=', 'friends.user_id')
+            ->where('approved', 0)
+            ->get();
+    }
+
+    public function id()
+    {
+        return $this->id;
+
+    }
+
 
 
 }

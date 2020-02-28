@@ -8,7 +8,6 @@
                     <div class="card-header">
                         <img src="{{ Auth::user()->img_location }}" width="90px">
                         <h3>{{Auth::user()->name . " " . Auth::user()->surname }}</h3>
-
                     </div>
 
                         <nav class="navbar  navbar-dark bg-dark sidebar">
@@ -23,15 +22,13 @@
                                         <a class="nav-link" href="#">Gallery</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Friends</a>
+                                        <a class="nav-link" href="{{ 'friends' }}">Friends</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" href="{{ 'following' }}">Following</a>
                                     </li>
                                 </ul>
                         </nav>
-
-
                 </div>
             </div>
             <div class="col-6">
@@ -57,7 +54,10 @@
                                 <p>{!!  $post->post !!}</p>
                                 <div class="row">
                                     <div class="col-9">
-                                        Like button
+                                        <form method= "POST" action="{{'/home/like/'. $post->id}}" >
+                                            @csrf
+                                            <button type="submit" class="btn btn-primary mb-2">Like</button>
+                                        </form>
                                     </div>
                                     <div class="col-3">
                                         @if(Auth::user()->id === $post->user_id)

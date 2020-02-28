@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 
 
 class PostsController extends Controller
@@ -20,9 +21,9 @@ class PostsController extends Controller
             'post' => ['required', 'min:5', 'max:500']
         ]);
 
-        $post = new Post();
-        $post->post = $request->input('post');
-        $request->user()->posts()->save($post);
+        Auth::user()->posts()->create([
+            'post' => $request->input('post')
+        ]);
 
         return redirect('home');
     }

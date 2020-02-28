@@ -31,10 +31,9 @@ class FollowerController extends Controller
     public function follow(Request $request, User $user)
     {
         if (Auth::user()->following()->where('following_to_id', $user->id)->value('following_to_id') !== $user->id) {
-            $following = new Follower();
-            $following->user_id = Auth::user()->id;
-            $following->following_to_id = $user->id;
-            $request->user()->following()->save($following);
+            Auth::user()->following()->create([
+                'following_to_id' => $user->id
+            ]);
         }
 
         return redirect('/profile/' . $user->id);
@@ -42,13 +41,8 @@ class FollowerController extends Controller
 
     public function unfollow(User $user)
     {
-        $followingAll = Auth::user()->following()->get();
 
-        foreach ($followingAll as $following) {
-            if ($following->following_to_id === $user->id) {
-                $following->delete();
-            }
-        }
+        Auth::user()->following()->where('following_to_id', $user->id)->delete();
 
         return redirect('/profile/' . $user->id);
     }

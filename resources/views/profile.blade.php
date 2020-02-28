@@ -67,9 +67,18 @@
                 <div class="card">
                     @if(Auth::user()->id !== $user->id)
                         <div class="card-header">
-                            <form>
-                                <button type="submit" class="btn btn-primary">Add Friend</button>
+                            @if(Auth::user()->pendingInvitations()->where('pending_friend_id', $user->id)->value('pending_friend_id') !== $user->id)
+                                <form method="POST" action="{{ '/profile/friend/' . $user->id }}">
+                                    @csrf
+                                 <button type="submit" name="friend" class="btn btn-primary">Add Friend</button>
                             </form>
+                                @elseif(Auth::user()->friends()->where('friend_id', $user->id)->value('friend_id') == $user->id)
+                                <form method="POST" action="{{ '/profile/friend/' . $user->id }}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" name="friend" class="btn btn-primary">UnFriend</button>
+                                </form>
+                            @endif
                             @if(Auth::user()->following()->where('following_to_id', $user->id)->value('following_to_id') !== $user->id)
                                 <form method="POST" action="{{ '/profile/' . $user->id }}">
                                     @csrf

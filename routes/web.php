@@ -38,4 +38,14 @@ Route::post('/profile/{user}', 'FollowerController@follow');
 Route::delete('/profile/{user}', 'FollowerController@unfollow');
 Route::get('/following', 'FollowerController@allFollowingTo');
 
+//Add Friend, unfriend, approve and delete requests, friends view
+Route::post('/profile/friend/{user}', 'PendingInvitationController@inviteFriend');
+Route::delete('/profile/friend/{user}', 'FriendsController@deleteFriend');
+Route::get('/friends', 'FriendsController@allFriendsAndPending');
+Route::post('friends/approve/{user}', 'PendingInvitationController@approveFriend');
+Route::delete('/friends/{user}', 'PendingInvitationController@deleteFriendRequest');
+Route::delete('/friends/delete/{user}', 'FriendsController@deleteFriendFromFriendsView');
+
+//Like, unlike function
+//Route::post('/profile/friend/{user}', 'LikeController@like');
 
