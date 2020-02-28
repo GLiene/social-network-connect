@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row" id="head-info">
                         <div class="col">
-                            <img src="{{ $user->img_location }}" width="120px">
+                            <img src="{{ asset("storage/". $user->img_location) }}" width="120px">
                             <h3>{{ $user->name . " " . $user->surname }}</h3>
 
                         </div>

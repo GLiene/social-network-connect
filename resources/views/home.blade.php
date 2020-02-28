@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img src="{{ Auth::user()->img_location }}" width="90px">
+                        <img src="{{ asset("storage/". Auth::user()->img_location) }}" width="90px">
                         <h3>{{Auth::user()->name . " " . Auth::user()->surname }}</h3>
                     </div>
 
@@ -52,6 +52,7 @@
                             <div class="card-body">
                                 <p>{{ $post->created_at }}</p>
                                 <p>{!!  $post->post !!}</p>
+                                <hr/>
                                 <div class="row">
                                     <div class="col-9">
                                         <form method= "POST" action="{{'/like/'. $post->id}}" >
