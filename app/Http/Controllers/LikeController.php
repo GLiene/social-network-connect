@@ -11,19 +11,27 @@ class LikeController extends Controller
 {
     public function like(Post $post)
     {
-        Auth::user()->likes()->create([
-            'likeable_id' => $post->id,
-            'likeable_type' => 'POST',
-        ]);
+        if(Auth::user()->likes()->where('likeable_id', $post->id)->value('likeable_id') !== $post->id)
+        {
+            Auth::user()->likes()->create([
+                'likeable_id' => $post->id,
+                'likeable_type' => 'POST',
+            ]);
+        }
 
-        return redirect('home');
+        return redirect()->back();
     }
 
     public function unlike(Post $post)
     {
         Auth::user()->likes()->where('likeable_id', $post->id)->delete();
 
-        return redirect('home');
+        return redirect()->back();
+
+    }
+
+    public function likeCount()
+    {
 
     }
 }

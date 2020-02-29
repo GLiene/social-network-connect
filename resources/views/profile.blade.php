@@ -9,7 +9,6 @@
                         <div class="col">
                             <img src="{{ asset("storage/". $user->img_location) }}" width="120px">
                             <h3>{{ $user->name . " " . $user->surname }}</h3>
-
                         </div>
                         <div class="col-6">
                             <p>{{ $user->bio }}</p>
@@ -28,8 +27,12 @@
         <div class="row">
             <div class="col">
                 <div class="card">
-
-                    Here will be users galleries
+                    <h5>Galleries</h5>
+                    @foreach($allGalleries as $gallery)
+                        <div class="col-4">
+                            <a href="{{ route('galleryShow', $gallery->id) }}"><img src="{{ asset("storage/" . "default.jpg") }}" width="90px"></a>
+                        </div>
+                    @endforeach
 
                 </div>
             </div>
@@ -43,7 +46,27 @@
                                 <p>{!!  $post->post !!}</p>
                                 <div class="row">
                                     <div class="col-9">
-                                        Like button
+                                        @if(Auth::user()->likes()->where('likeable_id', $post->id)->value('likeable_id') !== $post->id)
+                                            <form method="POST" action="{{'/like/'. $post->id}}">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary mb-2">Like</button>
+                                            </form>
+                                        @else
+                                            <form method="POST" action="{{'/like/'. $post->id}}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-primary mb-2">unlike</button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                    <div class="col-3">
+                                        @if(Auth::user()->id === $post->user_id)
+                                            <form method="POST" action="{{route('deletePost', $post->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-primary mb-2">Delete</button>
+                                            </form>
+                                        @endif
                                     </div>
                                     <div class="col-3">
                                         @if(Auth::user()->id === $user->id)
@@ -85,7 +108,7 @@
                                     <button type="submit" class="btn btn-primary">Follow</button>
                                 </form>
                             @else
-                                <form method="POST" action="{{ '/profile/' . $user->id }}">
+                                <form method="POST" action="{{route('deletePost', $post->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-primary">Unfollow</button>
@@ -94,12 +117,10 @@
                         </div>
                     @endif
                     <div class="card-body">
-
-                        At the moment not selling your data to third parties.
+                        <p>Here will be visible friends</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

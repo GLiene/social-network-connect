@@ -71,14 +71,6 @@ class User extends Authenticatable
         return $this->belongsToMany("App\User","pending_invitations","pending_friend_id","user_id");
     }
 
-    public function pendingFriends()
-    {
-        return DB::table('users')
-            ->leftJoin('friends', 'users.id', '=', 'friends.user_id')
-            ->where('approved', 0)
-            ->get();
-    }
-
     public function likes()
     {
         return $this->hasMany('App\Like');
@@ -86,7 +78,7 @@ class User extends Authenticatable
 
     public function img_location(): string
     {
-        return $this->img_location ? Storage::url($this->img_location, 'public') : asset("/default.jpg");
+        return $this->img_location ? Storage::url($this->img_location, 'public') : asset("storage/" . "/default.jpg");
     }
 
     public function galleries()

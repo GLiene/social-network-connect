@@ -24,8 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
- //       $posts = Auth::user()->allPostsFromImFollowing();
         $followingToId = [];
 
         foreach(Auth::user()->following->all() as $user)

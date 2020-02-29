@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\User;
 
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ class SearchController extends Controller
         $searchQuery = $request->input('searchQuery');
 
         $users = User::where('name', 'LIKE', '%' . $searchQuery . '%')
-        ->orWhere('surname', 'LIKE', '%' . $searchQuery . '%')->get();
+            ->orWhere('surname', 'LIKE', '%' . $searchQuery . '%')->get();
 
         return view('search.results', compact('users'));
     }

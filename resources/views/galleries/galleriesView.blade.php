@@ -13,19 +13,19 @@
                     <nav class="navbar  navbar-dark bg-dark sidebar">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{'profile/' . Auth::user()->id }}">Profile</a>
+                                <a class="nav-link" href="{{route('profile', Auth::user()->id) }}">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{'edit/' }}">Edit profile</a>
+                                <a class="nav-link" href="{{route('editForm') }}">Edit profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Gallery</a>
+                                <a class="nav-link" href="{{ route('galleriesShow') }}">Gallery</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ 'friends' }}">Friends</a>
+                                <a class="nav-link" href="{{ route('friendsAndPending') }}">Friends</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ 'following' }}">Following</a>
+                                <a class="nav-link" href="{{ route('following') }}">Following</a>
                             </li>
                         </ul>
                     </nav>

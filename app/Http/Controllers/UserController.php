@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Gallery;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +18,9 @@ class UserController extends Controller
     public function showUsersPosts(User $user)
     {
         $posts = $user->posts()->get()->sortByDesc('id');
+        $allGalleries = Gallery::where(['user_id' => Auth::user()->id])->get();
 
-
-        return view("/profile", ["user" => $user, "posts" => $posts]);
+        return view("/profile", ["user" => $user, "posts" => $posts, "allGalleries" => $allGalleries]);
     }
 
     public function editForm()
@@ -28,7 +29,6 @@ class UserController extends Controller
 
         return view('/edit', compact('user'));
     }
-
 
     public function update(Request $request)
     {
@@ -45,30 +45,18 @@ class UserController extends Controller
             'updated_at' => now(),
         ]);
         return back();
-     //   return view('/profile', ['user' => $user]);
 
     }
 
     public function profilePictureUpload(Request $request)
     {
-        if(request()->hasFile("image")){
+        if (request()->hasFile("image")) {
             $user = Auth::user();
             $user->update([
-                "img_location" => request()->image->store("img","public"),
+                "img_location" => request()->image->store("img", "public"),
             ]);
         }
 
         return back()->with('message', 'Profile Picture Uploaded');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return;
     }
 }
