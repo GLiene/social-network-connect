@@ -61,11 +61,13 @@
                                     <a href="{{ 'galleries/' . $gallery->id }}">{{ $gallery->title }}</a>
                                 </div>
                                 <div class="col-6">
+                                    @if(Auth::user()->id === $gallery->user_id)
                                     <form method="POST" action="{{ '/galleries/delete/' . $gallery->id }}">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" name="gallery" class="btn btn-primary">Delete gallery</button>
                                     </form>
+                                        @endif
                                 </div>
 
                             </div>
