@@ -9,7 +9,6 @@
                         <img src="{{ asset("storage/". Auth::user()->img_location) }}" width="90px">
                         <h3>{{Auth::user()->name . " " . Auth::user()->surname }}</h3>
                     </div>
-
                     <nav class="navbar  navbar-dark bg-dark sidebar">
                         <ul class="navbar-nav">
                             <li class="nav-item">

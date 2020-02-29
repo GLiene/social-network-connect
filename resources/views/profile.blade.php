@@ -14,7 +14,6 @@
                             <p>{{ $user->bio }}</p>
                         </div>
                         <div class="col">
-                            <p>Birth of date: {{ $user->birthday }}</p>
                             <p>Email: {{ $user->email }}</p>
                             <p>Phone number: {{ $user->phone_number }}</p>
                             <p>Address: {{ $user->address }}</p>
@@ -40,7 +39,7 @@
                 <div>
                     @foreach ($posts as $post)
                         <div class="card">
-                            <div class="card-header"><label for="post">{{$post->user_id}}</label></div>
+                            <div class="card-header"><label for="post">{{$user->name ." " . $user->surname}}</label></div>
                             <div class="card-body">
                                 <p>{{ $post->created_at }}</p>
                                 <p>{!!  $post->post !!}</p>

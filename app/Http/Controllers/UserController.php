@@ -18,7 +18,7 @@ class UserController extends Controller
     public function showUsersPosts(User $user)
     {
         $posts = $user->posts()->get()->sortByDesc('id');
-        $allGalleries = Gallery::where(['user_id' => Auth::user()->id])->get();
+        $allGalleries = Gallery::where(['user_id' => $user->id])->get();
 
         return view("/profile", ["user" => $user, "posts" => $posts, "allGalleries" => $allGalleries]);
     }

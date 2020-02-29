@@ -6,7 +6,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img src="{{ Auth::user()->img_location }}" width="90px">
+                        <img src="{{ asset("storage/". Auth::user()->img_location) }}" width="90px">
                         <h3>{{Auth::user()->name . " " . Auth::user()->surname }}</h3>
                     </div>
 
@@ -40,7 +40,7 @@
                 @foreach($users as $user)
                     <div class="card">
                         <div class="card-body">
-                            <img src="{{ $user->img_location }}" width="90px">
+                            <img src="{{ asset("storage/". $user->img_location) }}" width="90px">
                             <a href="{{ 'profile/' . $user->id }}">{{ $user->name }}</a>
                         </div>
                     </div>

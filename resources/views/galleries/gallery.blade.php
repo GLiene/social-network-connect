@@ -37,7 +37,6 @@
                         <div >
                             <h3 class="d-flex justify-content-center">{{ $gallery->title }}</h3>
                         </div>
-
                     </div>
                 </div>
                 <div class="card">

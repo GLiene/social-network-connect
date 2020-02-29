@@ -6,26 +6,26 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <img src="{{ Auth::user()->img_location }}" width="90px">
+                        <img src="{{ asset("storage/". Auth::user()->img_location) }}" width="90px">
                         <h3>{{Auth::user()->name . " " . Auth::user()->surname }}</h3>
                     </div>
 
                     <nav class="navbar  navbar-dark bg-dark sidebar">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{'profile/' . Auth::user()->id }}">Profile</a>
+                                <a class="nav-link" href="{{route('profile', Auth::user()->id) }}">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{'edit/' }}">Edit profile</a>
+                                <a class="nav-link" href="{{route('editForm') }}">Edit profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Gallery</a>
+                                <a class="nav-link" href="{{ route('galleriesShow') }}">Gallery</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Friends</a>
+                                <a class="nav-link" href="{{ route('friendsAndPending') }}">Friends</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ 'following' }}">Following</a>
+                                <a class="nav-link" href="{{ route('following') }}">Following</a>
                             </li>
                         </ul>
                     </nav>
@@ -42,7 +42,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <img src="{{ $friend->img_location }}" width="90px">
+                                    <img src="{{ asset("storage/". $friend->img_location) }}" width="90px">
                                     <a href="{{ 'profile/' . $friend->id }}">{{ $friend->name }}</a>
                                 </div>
                                 <div class="col">
@@ -70,7 +70,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <img src="{{ $friend->img_location }}" width="90px">
+                                    <img src="{{ asset("storage/". $friend->img_location) }}" width="90px">
                                     <a href="{{ 'profile/' . $friend->id }}">{{ $friend->name }}</a>
                                 </div>
                                 <div class="col">
